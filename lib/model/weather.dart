@@ -64,4 +64,26 @@ class Weather extends Equatable {
 
   @override
   bool get stringify => true;
+
+  Weather copyWith({
+    String? description,
+    String? icon,
+    double? temp,
+    double? tempMin,
+    double? TempMax,
+    String? name,
+    String? country,
+    DateTime? lastUpdated,
+  }) {
+    return Weather(
+      description: description ?? this.description,
+      icon: icon ?? this.icon,
+      temp: temp ?? this.temp,
+      tempMin: tempMin ?? this.tempMin,
+      TempMax: TempMax ?? this.TempMax,
+      name: name ?? this.name,
+      country: country ?? this.country,
+      lastUpdated: lastUpdated ?? this.lastUpdated,
+    );
+  }
 }

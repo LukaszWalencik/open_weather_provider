@@ -27,6 +27,7 @@ class WeatherApiServices {
         });
     try {
       final http.Response response = await httpClient.get(uri);
+
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
       }
@@ -51,8 +52,9 @@ class WeatherApiServices {
           'lat': '${directGeocoding.lat}',
           'lon': '${directGeocoding.lon}',
           'units': kUnit,
-          'appid': dotenv.env
+          'appid': dotenv.env['APPID']
         });
+
     try {
       final http.Response response = await httpClient.get(uri);
       if (response.statusCode != 200) {

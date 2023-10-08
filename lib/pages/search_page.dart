@@ -51,6 +51,9 @@ class _SearchPageState extends State<SearchPage> {
                     }
                     return null;
                   },
+                  onSaved: (String? input) {
+                    _city = input;
+                  },
                 ),
               ),
               SizedBox(height: 20),

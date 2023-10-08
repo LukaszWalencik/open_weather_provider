@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? city;
+  String? _city;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +18,15 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () async {
-                city = await Navigator.push(
+                _city = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SearchPage(),
+                    builder: (context) {
+                      return SearchPage();
+                    },
                   ),
                 );
-                print(city);
+                print('City: $_city');
               },
               icon: Icon(Icons.search))
         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:open_weather_provider/pages/search_page.dart';
+import 'package:open_weather_provider/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +29,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
                 print('City: $_city');
+                if (_city != null) {
+                  context.read<WeatherProvider>().fetchWeather(_city!);
+                }
               },
               icon: Icon(Icons.search))
         ],

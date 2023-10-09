@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:open_weather_provider/pages/search_page.dart';
 import 'package:open_weather_provider/providers/providers.dart';
+import 'package:open_weather_provider/widgets/error_dialog.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -56,12 +57,7 @@ class _HomePageState extends State<HomePage> {
       );
     }
     if (state.status == WeatherStatus.error && state.weather.name == '') {
-      return Center(
-        child: Text(
-          'Select a city',
-          style: TextStyle(fontSize: 20),
-        ),
-      );
+      errorDialog(context, state.error.errorMsg);
     }
     return Center(
       child: Text(

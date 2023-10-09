@@ -23,11 +23,13 @@ class WeatherProvider with ChangeNotifier {
       final Weather weather = await weatherRepository.fetchWeather(city);
       _state = _state.copyWith(status: WeatherStatus.success, weather: weather);
       print('State: $_state');
+      notifyListeners();
     } catch (e) {
       _state = _state.copyWith(
           status: WeatherStatus.error,
           error: CustomError(errorMsg: e.toString()));
       print('State: $_state');
+      notifyListeners();
     }
   }
 }

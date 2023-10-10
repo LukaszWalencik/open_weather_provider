@@ -28,7 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<WeatherProvider>(
             create: (context) => WeatherProvider(
-                weatherRepository: context.read<WeatherRepository>()))
+                weatherRepository: context.read<WeatherRepository>())),
+        ChangeNotifierProvider<TempSettingsProvider>(
+            create: (context) => TempSettingsProvider()),
       ],
       child: MaterialApp(
         title: 'Weather App',

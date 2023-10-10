@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:open_weather_provider/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -14,7 +16,12 @@ class SettingsPage extends StatelessWidget {
         child: ListTile(
           title: Text('Temperature Unit'),
           subtitle: Text('Celcius/Fahrenheit'),
-          trailing: Switch(value: true, onChanged: (_) {}),
+          trailing: Switch(
+              value: context.watch<TempSettingsProvider>().state.unit ==
+                  TempUnit.celcius,
+              onChanged: (_) {
+                context.read<TempSettingsProvider>().toggleTempUnit();
+              }),
         ),
       ),
     );

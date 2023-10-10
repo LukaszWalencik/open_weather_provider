@@ -45,6 +45,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   String showTemperature(double temperature) {
+    final tempUnit = context.watch<TempSettingsProvider>().state.unit;
+    if (tempUnit == TempUnit.fahrenheit) {
+      return ((temperature * 9 / 5) + 32).toStringAsFixed(1) + '℉';
+    }
     return temperature.toStringAsFixed(1) + '℃';
   }
 

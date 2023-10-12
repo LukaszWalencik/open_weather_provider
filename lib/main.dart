@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:open_weather_provider/pages/home_page.dart';
 import 'package:open_weather_provider/providers/providers.dart';
 import 'package:open_weather_provider/providers/theme/theme_provider.dart';
@@ -27,22 +28,17 @@ class MyApp extends StatelessWidget {
             httpClient: http.Client(),
           )),
         ),
-        ChangeNotifierProvider<WeatherProvider>(
-            create: (context) => WeatherProvider(
-                weatherRepository: context.read<WeatherRepository>())),
-        ChangeNotifierProvider<TempSettingsProvider>(
+        StateNotifierProvider<WeatherProvider, WeatherState>(
+            create: (context) => WeatherProvider()),
+        StateNotifierProvider<TempSettingsProvider, TempSettingsState>(
             create: (context) => TempSettingsProvider()),
-        ChangeNotifierProxyProvider<WeatherProvider, ThemeProvider>(
-          create: (context) => ThemeProvider(),
-          update: (BuildContext context, WeatherProvider wp,
-                  ThemeProvider? theme) =>
-              theme!..update(wp),
-        )
+        StateNotifierProvider<ThemeProvider, ThemeState>(
+            create: (context) => ThemeProvider()),
       ],
       builder: (context, widget) => MaterialApp(
         title: 'Weather App',
         debugShowCheckedModeBanner: false,
-        theme: context.watch<ThemeProvider>().state.appTheme == AppTheme.light
+        theme: context.watch<ThemeState>().appTheme == AppTheme.light
             ? ThemeData.light()
             : ThemeData.dark(),
         home: const HomePage(),
